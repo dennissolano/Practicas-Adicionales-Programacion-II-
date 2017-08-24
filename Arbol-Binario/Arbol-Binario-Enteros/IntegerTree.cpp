@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   IntegerTree.cpp
- * Author: dennis
- * 
- * Created on 23 de agosto de 2017, 06:15 PM
- */
 
 #include "IntegerTree.h"
 
@@ -30,7 +18,54 @@ IntegerTree::~IntegerTree()
 
 bool IntegerTree::insert(int number)
 {
+    bool result = false;
+    std::shared_ptr<Node> current = root;
 
+    if( !current ) // Conjunto vacío.
+    {
+        root = std::shared_ptr<Node>( new Node( number ) );
+        result = true;
+    }
+    else
+    {
+        while( current )
+
+            if( current->data == number )
+            {
+                current = nullptr;
+            }
+            else
+            {
+                if( current->data < number ) // Insertar en subárbol derecho.
+                {
+                    if( !current->rightChild )
+                    {
+                        result = true;
+                        current->rightChild = std::shared_ptr<Node>( new Node( number ) );
+                        current = nullptr;
+                    }
+                    else
+                    {
+                        current = current->rightChild;
+                    }
+                }
+                else // Insertar en subárbol izquierdo.
+                {
+                    if( !current->leftChild )
+                    {
+                        result = true;
+                        current->leftChild = std::shared_ptr<Node>( new Node( number ) );
+                        current = nullptr;
+                    }
+                    else
+                    {
+                        current = current->leftChild;
+                    }
+                }
+            }
+    }
+
+    return result;
 }
 
 bool IntegerTree::remove(int number)
@@ -66,9 +101,20 @@ bool IntegerTree::search(int number) const
     return result;
 }
 
-std::string IntegerTree::toStr() const
+void IntegerTree::toStr() const
 {
-
+    std::
+    std::cout << '{';
+    printTree( root );
+    std::cout << '}' << std::endl;
 }
 
-
+void printTree(const std::shared_ptr<IntegerTree::Node> node)
+{
+    if( node )
+    {
+        printTree( node->leftChild );
+        std::cout << node->data << ',';
+        printTree( node->rightChild );
+    }
+}

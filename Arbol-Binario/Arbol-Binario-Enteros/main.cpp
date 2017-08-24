@@ -12,15 +12,20 @@
  */
 
 #include <cstdlib>
+#include "IntegerTree.h"
 
-using namespace std;
-
-/*
- * 
- */
 int main(int argc, char** argv)
 {
-
-    return 0;
+    IntegerTree setA;
+ 
+    setA.insert( 13 );
+    setA.insert( 7 );
+    setA.insert( 3 );
+    setA.insert( 11 );
+    setA.insert( 15 );
+    setA.insert( 22 );
+    setA.insert( 19 );
+    
+    setA.toStr( );
 }
 

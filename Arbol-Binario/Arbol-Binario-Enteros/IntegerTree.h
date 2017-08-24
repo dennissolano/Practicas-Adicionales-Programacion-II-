@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   IntegerTree.h
- * Author: dennis
- *
- * Created on 23 de agosto de 2017, 06:15 PM
- */
 
 #ifndef INTEGERTREE_H
 #define INTEGERTREE_H
@@ -39,11 +27,6 @@ private:
         ~Node()
         {
             std::cout << "Borrando: " << data << std::endl;
-        }
-
-        bool isLeaf(Node node)
-        {
-            return (!rightChild && !leftChild) ? true : false;
         }
     };
 
@@ -84,9 +67,11 @@ public:
     // EFE: Retorna un nuevo conjunto ordenado que representa la diferencia simétrica de *this con "other".
     IntegerTree& operator/(const IntegerTree& other) const;
 
-    // EFE: Retorna una hilera que representa a *this.
-    std::string toStr() const;
+    // EFE: ToDo.
+    void toStr() const;
 
+    // EFE: ToDo.
+    friend void printTree(const std::shared_ptr<IntegerTree::Node> node);
 };
 
 #endif /* INTEGERTREE_H */
