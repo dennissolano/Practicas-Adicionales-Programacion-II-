@@ -103,7 +103,6 @@ bool IntegerTree::search(int number) const
 
 void IntegerTree::toStr() const
 {
-    std::
     std::cout << '{';
     printTree( root );
     std::cout << '}' << std::endl;
