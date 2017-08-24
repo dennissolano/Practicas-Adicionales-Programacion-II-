@@ -108,7 +108,7 @@ void IntegerTree::toStr() const
     std::cout << '}' << std::endl;
 }
 
-void printTree(const std::shared_ptr<IntegerTree::Node> node)
+void IntegerTree::printTree(const std::shared_ptr<Node> node)const
 {
     if( node )
     {

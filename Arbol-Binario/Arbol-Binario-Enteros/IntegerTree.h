@@ -67,11 +67,11 @@ public:
     // EFE: Retorna un nuevo conjunto ordenado que representa la diferencia simétrica de *this con "other".
     IntegerTree& operator/(const IntegerTree& other) const;
 
-    // EFE: ToDo.
+    // EFE: Retorna una hilera que representa a *this.
     void toStr() const;
 
-    // EFE: ToDo.
-    friend void printTree(const std::shared_ptr<IntegerTree::Node> node);
+    // EFE: Imprime recursivamente en orden, el conjunto de números almacenado en el árbol binario.
+    void printTree(const std::shared_ptr<Node> node)const;
 };
 
 #endif /* INTEGERTREE_H */
