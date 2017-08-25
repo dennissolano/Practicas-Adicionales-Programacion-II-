@@ -132,6 +132,8 @@ bool IntegerTree::remove(int number)
         }
         else
         {
+            // En este contexto temp2 es el nodo papá de temp1.
+
             if( temp1->data < number ) // Visitar subárbol derecho.
             {
                 temp2 = temp1;
@@ -149,9 +151,23 @@ bool IntegerTree::remove(int number)
                 {
                     if( temp1->data < temp2->data ) // temp1 es hijo izquierdo de temp2.
                     {
-
+                        if( temp1->isLeaf( ) ) // Caso 1: temp1 es nodo hoja.
+                        {
+                            temp1 = nullptr;
+                            result = true;
+                        }
+                        else
+                        {
+                            if( temp1->rightChild && temp1->leftChild ) // Caso 2: temp1 tiene hijo izquierdo e hijo derecho.
+                            {
+                                temp2->leftChild = temp1->leftChild;
+                                temp2->leftChild->rightChild = temp1->rightChild; // EL hijo derecho del hijo izquierdo de temp2, apunta al hijo derecho de temp1.
+                                temp1 = nullptr;
+                                result = true;
+                            }
+                        }
                     }
-                    else
+                    else // temp1 es hijo derecho de temp2.
                     {
 
                     }
