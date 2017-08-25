@@ -17,7 +17,7 @@
 int main(int argc, char** argv)
 {
     IntegerTree setA;
- 
+
     setA.insert( 13 );
     setA.insert( 7 );
     setA.insert( 3 );
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     setA.insert( 15 );
     setA.insert( 22 );
     setA.insert( 19 );
-    
-    setA.toStr( );
+
+    std::cout << "A:" << setA.toStr( ) << std::endl;
 }
 

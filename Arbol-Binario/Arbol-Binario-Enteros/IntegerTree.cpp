@@ -1,4 +1,6 @@
 
+#include <algorithm>
+
 #include "IntegerTree.h"
 
 IntegerTree::IntegerTree()
@@ -101,19 +103,23 @@ bool IntegerTree::search(int number) const
     return result;
 }
 
-void IntegerTree::toStr() const
+std::string IntegerTree::toStr() const
 {
-    std::cout << '{';
-    printTree( root );
-    std::cout << '}' << std::endl;
+    std::stringstream buffer;
+
+    buffer << '{';
+    printTree( root, buffer );
+    buffer << '}';
+
+    return buffer.str( );
 }
 
-void IntegerTree::printTree(const std::shared_ptr<Node> node)const
+void IntegerTree::printTree(const std::shared_ptr<Node> node, std::stringstream& buffer)const
 {
     if( node )
     {
-        printTree( node->leftChild );
-        std::cout << node->data << ',';
-        printTree( node->rightChild );
+        printTree( node->leftChild, buffer );
+        buffer << node->data << ',';
+        printTree( node->rightChild, buffer );
     }
 }

@@ -32,6 +32,11 @@ private:
 
     std::shared_ptr<Node> root;
 
+private:
+    
+    // EFE: Imprime recursivamente en orden, el conjunto de números almacenado en el árbol binario.
+    void printTree(const std::shared_ptr<Node> node, std::stringstream& buffer)const;
+
 public:
 
     // EFE: Construye un nuevo conjunto de enteros vacío.
@@ -68,10 +73,7 @@ public:
     IntegerTree& operator/(const IntegerTree& other) const;
 
     // EFE: Retorna una hilera que representa a *this.
-    void toStr() const;
-
-    // EFE: Imprime recursivamente en orden, el conjunto de números almacenado en el árbol binario.
-    void printTree(const std::shared_ptr<Node> node)const;
+    std::string toStr() const;
 };
 
 #endif /* INTEGERTREE_H */
