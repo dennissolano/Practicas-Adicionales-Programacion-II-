@@ -77,7 +77,6 @@ bool IntegerTree::remove(int number)
     std::shared_ptr<Node> temp2 = nullptr;
     std::shared_ptr<Node> temp3 = nullptr;
     
-   
     if( temp1->data == number ) // Caso A: Eliminar raíz.
     {
         if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
@@ -127,7 +126,6 @@ bool IntegerTree::remove(int number)
     }
 
     return result;
-
 }
 
 bool IntegerTree::search(int number) const
