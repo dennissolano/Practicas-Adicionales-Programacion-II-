@@ -75,103 +75,55 @@ bool IntegerTree::remove(int number)
     bool result = false;
     std::shared_ptr<Node> temp1 = root;
     std::shared_ptr<Node> temp2 = nullptr;
-
-    /*
-     * temp1 = raiz, temp2(papá)
-     * 
-     * Si( El elemento en el nodo apuntado temp1 es igual al elemento a eliminar ) entonces
-     * {
-     *      temp2 = hijoDerecho de root;
-     *      temp1 = hijoIzquierdo de root;
-     * 
-     *      Mientras( temp1 != nullptr )
-     *      {
-     *          Si( El hijoDerecho del temporal1 es un puntero nulo ) entonces
-     *          {
-     *              hijoDerecho de temp1 = temp2;
-     *              temp1 = nullptr;       
-     *          }
-     *          Sino
-     *              temp1 = hijoDerecho de temp1; // Mover temp1 hasta que encuentre el mayor de todos los números del subárbol derecho.
-     *      }     
-     * 
-     *      root = hijoIzquierdo de root;
-     * }
-     * 
-     * Si( El elemento en el nodo apuntado por temp1 es igual al elemento a eliminar ) entonces
-     * {
-     * 
-     *      Si( temp1 es nodo Hoja )
-     *      {
-     *          eliminar temp1;
-     *      }
-     *      Sino
-     *      {    
-     *          Si( El elemento en el nodo apuntado por temp1 es menor que el elemento en el nodo apuntado por temp2 ) entonces temp1 es hijo izquierdo de temp2
-     *          {
-     *              Si( temp1 tiene hijoIzquierdo e hijoDerecho )
-     *              {
-     *                  EL hijoIzquierdo del nodo papá temp2 = hijoIzquierdo de temp1;
-     *                  El hijoDerecho del hijoIzquierdo de temp2 = hijoDerecho de temp1;
-     *                  Eliminar temp1; // Revisar comportamiento esperado.
-     *              }
-     *              Sino
-     *              {
-     *                  Si( temp1 tiene solo hijoIzquierdo )
-     *                  {
-     *                      EL hijoIzquierdo del nodo papá temp2 = hijoIzquierdo de temp1;
-     *                      Eliminar temp1; // Revisar comportamiento esperado.
-     *                  }
-     *                  Sino // temp1 tiene solo hijoDerecho
-     *                  {
-     *                      EL hijoIzquierdo del nodo papá temp2 = hijoDerecho de temp1;    
-     *                  }            
-     *              }    
-     *          }
-     *          Sino // temp1 es hijo derecho de temp2(nodo papá)
-     *          {
-     *              Si( temp1 tiene hijoIzquierdo e hijoDerecho )
-     *              {
-     *                  EL derecho del nodo papá temp2 = hijoIzquierdo de temp1;
-     *                  El hijoDerecho del hijoDerecho de temp2 = hijoDerecho de temp1;
-     *                  Eliminar temp1; // Revisar comportamiento esperado.
-     *              }
-     *              Sino
-     *              {
-     *                  Si( temp1 tiene solo hijoIzquierdo )
-     *                  {
-     *                      EL hijoDerecho del nodo papá temp2 = hijoIzquierdo de temp1;
-     *                      Eliminar temp1; // Revisar comportamiento esperado.
-     *                  }
-     *                  Sino // temp1 tiene solo hijoDerecho
-     *                  {
-     *                      EL hijoDerecho del nodo papá temp2 = hijoDerecho de temp1;    
-     *                  }            
-     *              }    
-     *   
-     *          }
-     * 
-     *     }
-     * 
-     * }
-     * Sino
-     * {     
-     * 
-     *      Si( El elemento en el nodo apuntado por temp1 es menor que el elemento a eliminar ) entonces Visitar subárbol derecho.
-     *      {
-     *          temp2 = temp1; // Guarda un puntero al nodo papá.
-     *          temp1 = hijoDerecho de temp1;
-     *      }
-     *      Sino
-     *      {
-     *          Visitar subárbol izquierdo
-     *          temp2 = temp1; // Guarda un puntero al nodo papá.
-     *          temp1 = hijoIzquierdo de temp1;
-     *      }
-     * }
-     */
-    if( root->data == number ) // Eliminar raíz.
+    std::shared_ptr<Node> temp3 = nullptr;
+    
+   
+    if( temp1->data == number ) // Caso A: Eliminar raíz.
     {
+        if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
+        {
+            temp2 = temp1->rightChild; // Guarda puntero a subárbol derecho de la raíz.
+            temp1 = temp1->leftChild;
+
+            while( temp1 ) // Buscar el mayor de los elementos del subárbol izquierdo de la ráiz.
+            {
+                if( !temp1->rightChild ) // Una vez que lo encuentra el mayor de los elementos, liga su hijo derecho que es nulo con el subárbol derecho de la raíz.
+                {
+                    temp1->rightChild = temp2;
+                    temp1 = nullptr;
+                }
+                else
+                {
+                    temp1 = temp1->rightChild;
+                }
+            }
+
+            temp3 = root->leftChild;
+            root = nullptr; // Elimina raíz original.
+            root = temp3; // Establece nueva raíz.
+        }
+        else
+        {
+            if( temp1->rightChild ) // Caso 2: La raíz tiene solo hijo derecho.
+            {
+                temp1 = temp1->rightChild;
+                root = nullptr;
+                root = temp1;
+            }
+            else
+            {
+                if( temp1->leftChild ) // Caso 3: La raíz tiene solo hijo izquierdo.
+                {
+                    temp1 = temp1->leftChild;
+                    root = nullptr;
+                    root = temp1;
+                }
+                else // Caso 4: EL árbol tiene solo un elemento la raíz.
+                {
+                    root = nullptr;
+                }
+            }
+        }
     }
 
     return result;
