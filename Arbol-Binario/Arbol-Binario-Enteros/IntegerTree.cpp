@@ -102,6 +102,7 @@ bool IntegerTree::remove(int number)
                 temp3 = root->leftChild;
                 root = nullptr; // Elimina raíz original.
                 root = temp3; // Establece nueva raíz.
+                result = true;
             }
             else
             {
@@ -110,6 +111,7 @@ bool IntegerTree::remove(int number)
                     temp1 = temp1->rightChild;
                     root = nullptr;
                     root = temp1;
+                    result = true;
                 }
                 else
                 {
@@ -118,10 +120,53 @@ bool IntegerTree::remove(int number)
                         temp1 = temp1->leftChild;
                         root = nullptr;
                         root = temp1;
+                        result = true;
                     }
                     else // Caso 4: EL árbol tiene solo un elemento la raíz.
                     {
                         root = nullptr;
+                        result = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if( temp1->data < number ) // Visitar subárbol derecho.
+            {
+                temp2 = temp1;
+                temp1 = temp1->rightChild;
+            }
+            else // Visitar subárbol izquierdo.
+            {
+                temp2 = temp1;
+                temp1 = temp1->leftChild;
+            }
+
+            while( temp1 )
+            {
+                if( temp1->data == number )
+                {
+                    if( temp1->data < temp2->data ) // temp1 es hijo izquierdo de temp2.
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    if( temp1->data < number ) // Visitar subárbol derecho.
+                    {
+                        temp2 = temp1;
+                        temp1 = temp1->rightChild;
+                    }
+                    else // Visitar subárbol izquierdo.
+                    {
+                        temp2 = temp1;
+                        temp1 = temp1->leftChild;
                     }
                 }
             }
