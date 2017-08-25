@@ -36,7 +36,7 @@ private:
 
         bool isLeaf()
         {
-            return (rightChild == nullptr && leftChild == nullptr) ? true : false;
+            return (!rightChild && !leftChild) ? true : false;
         }
     };
 

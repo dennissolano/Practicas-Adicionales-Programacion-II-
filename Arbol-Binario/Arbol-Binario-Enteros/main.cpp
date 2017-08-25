@@ -29,7 +29,8 @@ int main(int argc, char** argv)
 
     std::cout << "Conjunto Original:" << setA.toStr( ) << std::endl;
 
-    setA.remove(11);
+    setA.remove( 3 );
+
     std::cout << "A:" << setA.toStr( ) << std::endl;
 
 }

@@ -154,6 +154,7 @@ bool IntegerTree::remove(int number)
                         if( temp1->isLeaf( ) ) // Caso 1: temp1 es nodo hoja.
                         {
                             temp1 = nullptr;
+                            temp2->leftChild = nullptr; // Por alguna razón hay que hacer esto preguntarle al profe.
                             result = true;
                         }
                         else
@@ -189,7 +190,9 @@ bool IntegerTree::remove(int number)
                     {
                         if( temp1->isLeaf( ) ) // Caso 1: temp1 es nodo hoja.
                         {
+
                             temp1 = nullptr;
+                            temp2->rightChild = nullptr; // Por alguna razón hay que hacer esto preguntarle al profe.
                             result = true;
                         }
                         else
