@@ -77,6 +77,25 @@ bool IntegerTree::remove(int number)
     /*
      * temp1, temp2(papá)
      * 
+     * Si( El elemento en el nodo apuntado por la ráiz del árbol es igual al elemento a eliminar ) entonces
+     * {
+     *      La raíz del árbol = hijoIzquierdo de la raíz;
+     *      temp2 = hijoDerecho de temp1
+     *      eliminar temp1;
+     *      temp1 = raiz; // La nueva raíz del árbol.
+     * 
+     *      Mientras( temp1 != nullptr )
+     *      {
+     *          Si( El hijoDerecho del temporal1 es un puntero nulo ) entonces
+     *          {
+     *              hijoDerecho de temp1 = temp2;
+     *              temp1 = nullptr;       
+     *          }
+     *          Sino
+     *              temp1 = hijoDerecho de temp1; // Mover temp1 hasta que encuentre el mayor de todos los números del subárbol derecho.
+     *      }     
+     * }
+     * 
      * Si( El elemento en el nodo apuntado por temp1 es igual al elemento a eliminar ) entonces
      * {
      * 
