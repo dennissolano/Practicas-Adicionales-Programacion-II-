@@ -19,12 +19,12 @@ int main(int argc, char** argv)
     IntegerTree setA;
 
     setA.insert( 13 );
-    setA.insert( 7 );
+   /*setA.insert( 7 );
     setA.insert( 3 );
     setA.insert( 11 );
     setA.insert( 15 );
     setA.insert( 22 );
-    setA.insert( 19 );
+    setA.insert( 19 );*/
 
     std::cout << "Conjunto Original:" << setA.toStr( ) << std::endl;
 

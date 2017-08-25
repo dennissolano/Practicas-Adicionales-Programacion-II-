@@ -76,50 +76,53 @@ bool IntegerTree::remove(int number)
     std::shared_ptr<Node> temp1 = root;
     std::shared_ptr<Node> temp2 = nullptr;
     std::shared_ptr<Node> temp3 = nullptr;
-    
-    if( temp1->data == number ) // Caso A: Eliminar raíz.
+
+    if( temp1 ) // El árbol tiene elementos.
     {
-        if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
+        if( temp1->data == number ) // Caso A: Eliminar raíz.
         {
-            temp2 = temp1->rightChild; // Guarda puntero a subárbol derecho de la raíz.
-            temp1 = temp1->leftChild;
-
-            while( temp1 ) // Buscar el mayor de los elementos del subárbol izquierdo de la ráiz.
+            if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
             {
-                if( !temp1->rightChild ) // Una vez que lo encuentra el mayor de los elementos, liga su hijo derecho que es nulo con el subárbol derecho de la raíz.
-                {
-                    temp1->rightChild = temp2;
-                    temp1 = nullptr;
-                }
-                else
-                {
-                    temp1 = temp1->rightChild;
-                }
-            }
+                temp2 = temp1->rightChild; // Guarda puntero a subárbol derecho de la raíz.
+                temp1 = temp1->leftChild;
 
-            temp3 = root->leftChild;
-            root = nullptr; // Elimina raíz original.
-            root = temp3; // Establece nueva raíz.
-        }
-        else
-        {
-            if( temp1->rightChild ) // Caso 2: La raíz tiene solo hijo derecho.
-            {
-                temp1 = temp1->rightChild;
-                root = nullptr;
-                root = temp1;
+                while( temp1 ) // Buscar el mayor de los elementos del subárbol izquierdo de la ráiz.
+                {
+                    if( !temp1->rightChild ) // Una vez que lo encuentra el mayor de los elementos, liga su hijo derecho que es nulo con el subárbol derecho de la raíz.
+                    {
+                        temp1->rightChild = temp2;
+                        temp1 = nullptr;
+                    }
+                    else
+                    {
+                        temp1 = temp1->rightChild;
+                    }
+                }
+
+                temp3 = root->leftChild;
+                root = nullptr; // Elimina raíz original.
+                root = temp3; // Establece nueva raíz.
             }
             else
             {
-                if( temp1->leftChild ) // Caso 3: La raíz tiene solo hijo izquierdo.
+                if( temp1->rightChild ) // Caso 2: La raíz tiene solo hijo derecho.
                 {
-                    temp1 = temp1->leftChild;
+                    temp1 = temp1->rightChild;
                     root = nullptr;
                     root = temp1;
                 }
-                else // Caso 4: EL árbol tiene solo un elemento la raíz.
+                else
                 {
-                    root = nullptr;
+                    if( temp1->leftChild ) // Caso 3: La raíz tiene solo hijo izquierdo.
+                    {
+                        temp1 = temp1->leftChild;
+                        root = nullptr;
+                        root = temp1;
+                    }
+                    else // Caso 4: EL árbol tiene solo un elemento la raíz.
+                    {
+                        root = nullptr;
+                    }
                 }
             }
         }
