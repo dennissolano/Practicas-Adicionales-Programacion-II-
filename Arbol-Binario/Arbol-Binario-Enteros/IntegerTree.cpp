@@ -79,7 +79,7 @@ bool IntegerTree::remove(int number)
 
     if( temp1 ) // El árbol tiene elementos.
     {
-        if( temp1->data == number ) // Caso A: Eliminar raíz.
+        if( temp1->data == number ) // Caso Eliminar raíz.
         {
             if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
             {
@@ -145,7 +145,7 @@ bool IntegerTree::remove(int number)
                 temp1 = temp1->leftChild;
             }
 
-            while( temp1 )
+            while( temp1 ) // Finaliza cuando se elimina el elemento objetivo o cuando no lo encuentra.
             {
                 if( temp1->data == number )
                 {

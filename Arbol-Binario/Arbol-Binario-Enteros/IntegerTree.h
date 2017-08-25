@@ -34,7 +34,10 @@ private:
             std::cout << "Borrando: " << data << std::endl;
         }
 
-        inline bool isLeaf(){ return (!rightChild && !leftChild) ? true : false; }
+        bool isLeaf()
+        {
+            return (rightChild == nullptr && leftChild == nullptr) ? true : false;
+        }
     };
 
     std::shared_ptr<Node> root;
