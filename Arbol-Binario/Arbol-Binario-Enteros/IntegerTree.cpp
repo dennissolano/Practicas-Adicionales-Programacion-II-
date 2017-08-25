@@ -165,11 +165,61 @@ bool IntegerTree::remove(int number)
                                 temp1 = nullptr;
                                 result = true;
                             }
+                            else
+                            {
+                                if( temp1->leftChild ) // Caso 3: temp1 tiene solo hijo izquierdo.
+                                {
+                                    temp2->leftChild = temp1->leftChild;
+                                    temp1 = nullptr;
+                                    result = true;
+                                }
+                                else
+                                {
+                                    if( temp1->rightChild ) // Caso 4: temp1 tiene solo hijo derecho.
+                                    {
+                                        temp2->leftChild = temp1->rightChild;
+                                        temp1 = nullptr;
+                                        result = true;
+                                    }
+                                }
+                            }
                         }
                     }
                     else // temp1 es hijo derecho de temp2.
                     {
-
+                        if( temp1->isLeaf( ) ) // Caso 1: temp1 es nodo hoja.
+                        {
+                            temp1 = nullptr;
+                            result = true;
+                        }
+                        else
+                        {
+                            if( temp1->rightChild && temp1->leftChild ) // Caso 2: temp1 tiene hijo izquierdo e hijo derecho.
+                            {
+                                temp2->rightChild = temp1->leftChild;
+                                temp2->rightChild->rightChild = temp1->rightChild; // EL hijo derecho del hijo derecho de temp2, apunta al hijo derecho de temp1.
+                                temp1 = nullptr;
+                                result = true;
+                            }
+                            else
+                            {
+                                if( temp1->leftChild ) // Caso 3: temp1 tiene solo hijo izquierdo.
+                                {
+                                    temp2->rightChild = temp1->leftChild;
+                                    temp1 = nullptr;
+                                    result = true;
+                                }
+                                else
+                                {
+                                    if( temp1->rightChild ) // Caso 4: temp1 tiene solo hijo derecho.
+                                    {
+                                        temp2->rightChild = temp1->rightChild;
+                                        temp1 = nullptr;
+                                        result = true;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 else
