@@ -73,16 +73,16 @@ bool IntegerTree::insert(int number)
 bool IntegerTree::remove(int number)
 {
     bool result = false;
+    std::shared_ptr<Node> temp1 = root;
+    std::shared_ptr<Node> temp2 = nullptr;
 
     /*
-     * temp1, temp2(papá)
+     * temp1 = raiz, temp2(papá)
      * 
-     * Si( El elemento en el nodo apuntado por la ráiz del árbol es igual al elemento a eliminar ) entonces
+     * Si( El elemento en el nodo apuntado temp1 es igual al elemento a eliminar ) entonces
      * {
-     *      La raíz del árbol = hijoIzquierdo de la raíz;
-     *      temp2 = hijoDerecho de temp1
-     *      eliminar temp1;
-     *      temp1 = raiz; // La nueva raíz del árbol.
+     *      temp2 = hijoDerecho de root;
+     *      temp1 = hijoIzquierdo de root;
      * 
      *      Mientras( temp1 != nullptr )
      *      {
@@ -94,6 +94,8 @@ bool IntegerTree::remove(int number)
      *          Sino
      *              temp1 = hijoDerecho de temp1; // Mover temp1 hasta que encuentre el mayor de todos los números del subárbol derecho.
      *      }     
+     * 
+     *      root = hijoIzquierdo de root;
      * }
      * 
      * Si( El elemento en el nodo apuntado por temp1 es igual al elemento a eliminar ) entonces
@@ -168,6 +170,9 @@ bool IntegerTree::remove(int number)
      *      }
      * }
      */
+    if( root->data == number ) // Eliminar raíz.
+    {
+    }
 
     return result;
 

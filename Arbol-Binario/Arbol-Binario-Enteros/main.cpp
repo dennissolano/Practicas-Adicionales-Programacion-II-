@@ -27,5 +27,9 @@ int main(int argc, char** argv)
     setA.insert( 19 );
 
     std::cout << "A:" << setA.toStr( ) << std::endl;
+
+    setA.remove( 13 );
+
+    std::cout << "A:" << setA.toStr( ) << std::endl;
 }
 
