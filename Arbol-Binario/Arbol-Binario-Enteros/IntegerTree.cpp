@@ -32,7 +32,7 @@ bool IntegerTree::insert(int number)
     {
         while( current )
 
-            if( current->data == number )
+            if( current->data == number ) // Elemento repetido.
             {
                 current = nullptr;
             }
@@ -72,6 +72,85 @@ bool IntegerTree::insert(int number)
 
 bool IntegerTree::remove(int number)
 {
+    bool result = false;
+
+    /*
+     * temp1, temp2(papá)
+     * 
+     * Si( El elemento en el nodo apuntado por temp1 es igual al elemento a eliminar ) entonces
+     * {
+     * 
+     *      Si( temp1 es nodo Hoja )
+     *      {
+     *          eliminar temp1;
+     *      }
+     *      Sino
+     *      {    
+     *          Si( El elemento en el nodo apuntado por temp1 es menor que el elemento en el nodo apuntado por temp2 ) entonces temp1 es hijo izquierdo de temp2
+     *          {
+     *              Si( temp1 tiene hijoIzquierdo e hijoDerecho )
+     *              {
+     *                  EL hijoIzquierdo del nodo papá temp2 = hijoIzquierdo de temp1;
+     *                  El hijoDerecho del hijoIzquierdo de temp2 = hijoDerecho de temp1;
+     *                  Eliminar temp1; // Revisar comportamiento esperado.
+     *              }
+     *              Sino
+     *              {
+     *                  Si( temp1 tiene solo hijoIzquierdo )
+     *                  {
+     *                      EL hijoIzquierdo del nodo papá temp2 = hijoIzquierdo de temp1;
+     *                      Eliminar temp1; // Revisar comportamiento esperado.
+     *                  }
+     *                  Sino // temp1 tiene solo hijoDerecho
+     *                  {
+     *                      EL hijoIzquierdo del nodo papá temp2 = hijoDerecho de temp1;    
+     *                  }            
+     *              }    
+     *          }
+     *          Sino // temp1 es hijo derecho de temp2(nodo papá)
+     *          {
+     *              Si( temp1 tiene hijoIzquierdo e hijoDerecho )
+     *              {
+     *                  EL derecho del nodo papá temp2 = hijoIzquierdo de temp1;
+     *                  El hijoDerecho del hijoDerecho de temp2 = hijoDerecho de temp1;
+     *                  Eliminar temp1; // Revisar comportamiento esperado.
+     *              }
+     *              Sino
+     *              {
+     *                  Si( temp1 tiene solo hijoIzquierdo )
+     *                  {
+     *                      EL hijoDerecho del nodo papá temp2 = hijoIzquierdo de temp1;
+     *                      Eliminar temp1; // Revisar comportamiento esperado.
+     *                  }
+     *                  Sino // temp1 tiene solo hijoDerecho
+     *                  {
+     *                      EL hijoDerecho del nodo papá temp2 = hijoDerecho de temp1;    
+     *                  }            
+     *              }    
+     *   
+     *          }
+     * 
+     *     }
+     * 
+     * }
+     * Sino
+     * {     
+     * 
+     *      Si( El elemento en el nodo apuntado por temp1 es menor que el elemento a eliminar ) entonces Visitar subárbol derecho.
+     *      {
+     *          temp2 = temp1; // Guarda un puntero al nodo papá.
+     *          temp1 = hijoDerecho de temp1;
+     *      }
+     *      Sino
+     *      {
+     *          Visitar subárbol izquierdo
+     *          temp2 = temp1; // Guarda un puntero al nodo papá.
+     *          temp1 = hijoIzquierdo de temp1;
+     *      }
+     * }
+     */
+
+    return result;
 
 }
 

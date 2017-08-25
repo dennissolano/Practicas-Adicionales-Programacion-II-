@@ -1,4 +1,9 @@
 
+/*
+ * Archivo PDF de prácticas adicionales:
+ * https://mediacionvirtual.ucr.ac.cr/pluginfile.php/319702/mod_resource/content/2/p2-ejercicios.pdf 
+ */
+
 #ifndef INTEGERTREE_H
 #define INTEGERTREE_H
 
@@ -28,12 +33,14 @@ private:
         {
             std::cout << "Borrando: " << data << std::endl;
         }
+
+        inline bool isLeaf(){ return (!rightChild && !leftChild) ? true : false; }
     };
 
     std::shared_ptr<Node> root;
 
 private:
-    
+
     // EFE: Imprime recursivamente en orden, el conjunto de números almacenado en el árbol binario.
     void printTree(const std::shared_ptr<Node> node, std::stringstream& buffer)const;
 
