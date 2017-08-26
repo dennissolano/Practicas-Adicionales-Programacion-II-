@@ -95,7 +95,9 @@ bool IntegerTree::remove(int number)
      *              temp1 = hijoDerecho de temp1; // Mover temp1 hasta que encuentre el mayor de todos los números del subárbol derecho.
      *      }     
      * 
-     *      root = hijoIzquierdo de root;
+            temp3 = hijoIzquierdo de root;
+            eliminar root
+     *      root = temp3
      * }
      * 
      * Si( El elemento en el nodo apuntado por temp1 es igual al elemento a eliminar ) entonces
