@@ -72,6 +72,8 @@ bool IntegerTree::insert(int number)
 
 bool IntegerTree::remove(int number)
 {
+
+
     bool result = false;
     std::shared_ptr<Node> temp1 = root;
     std::shared_ptr<Node> temp2 = nullptr;
@@ -79,7 +81,7 @@ bool IntegerTree::remove(int number)
 
     if( temp1 ) // El árbol tiene elementos.
     {
-        if( temp1->data == number ) // Caso Eliminar raíz.
+        if( temp1->data == number ) // Caso Eliminar raíz. // Alternativa: Buscar el mayor de los menores o el menor de los mayores y ponerlo como raíz.
         {
             if( temp1->rightChild && temp1->leftChild ) // Caso 1: La raíz tiene hijo izquierdo e hijo derecho.
             {
@@ -154,7 +156,7 @@ bool IntegerTree::remove(int number)
                         if( temp1->isLeaf( ) ) // Caso 1: temp1 es nodo hoja.
                         {
                             temp1 = nullptr;
-                            temp2->leftChild = nullptr; // Con esto se elimina la relación padre-hijo.
+                            temp2->leftChild = nullptr; // Al utilizar punteros inteligentes y se tienen varios punteros a un mismo nodo, para eliminar este nodo hay que hacer nulos todos los punteros que apunten a ese nodo que se busca eliminar.
                             result = true;
                         }
                         else
