@@ -50,6 +50,10 @@ public:
     // EFE: retorna una nueva matriz que representa el producto matricial de *this y x.
     Matriz& operator*(const Matriz& x) const;
 
+    // REQ: *this esté correctamente inicializada.
+    // EFE: imprime en la salida estándar a *this.
+    void imprimir() const;
+
 private:
     int* matriz_ptr;
     int cntFilas;
