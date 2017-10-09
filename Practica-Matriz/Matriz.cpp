@@ -19,18 +19,19 @@ Matriz::Matriz()
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
+            //( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
+            *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) = 0;
         }
     }
 
-    /*for( int indiceFila = 0; indiceFila < this->cntFilas ; ++indiceFila )
+    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << ( this->matriz_ptr + indiceFila *  this->cntColumnas )[indiceColumna] << std::endl;
+            std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] << std::endl;
         }
         std::cout << std::endl << std::endl;
-    }*/
+    }
 }
 
 Matriz::Matriz(int cf, int cc)
@@ -44,7 +45,8 @@ Matriz::Matriz(int cf, int cc)
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
+            //( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
+            *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) = 0;
         }
     }
 
@@ -69,7 +71,8 @@ Matriz::Matriz(const Matriz& orig)
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = ( orig.matriz_ptr + indiceFila * orig.cntColumnas )[indiceColumna];
+            //( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = ( orig.matriz_ptr + indiceFila * orig.cntColumnas )[indiceColumna];
+            *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) = *( ( orig.matriz_ptr + indiceFila * orig.cntColumnas ) + indiceColumna );
         }
     }
 
@@ -104,6 +107,8 @@ Matriz::~Matriz()
 
 int Matriz::obtValor(int f, int c) const
 {
+    //return(this->matriz_ptr + f * this->cntColumnas )[c];
+    return *( ( this->matriz_ptr + f * this->cntColumnas ) + c );
 }
 
 int Matriz::obtCntFilas() const
@@ -118,6 +123,17 @@ int Matriz::obtCntColumnas() const
 
 void Matriz::asgValor(int f, int c, int v)
 {
+    //( this->matriz_ptr + f * this->cntColumnas )[c] = v;
+    *( ( this->matriz_ptr + f * this->cntColumnas ) + c ) = v;
+
+    /*for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
+    {
+        for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
+        {
+            std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) << std::endl;
+        }
+        std::cout << std::endl << std::endl;
+    }*/
 }
 
 Matriz& Matriz::operator*(const Matriz& x ) const
