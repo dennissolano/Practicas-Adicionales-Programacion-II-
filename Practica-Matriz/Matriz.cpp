@@ -15,11 +15,11 @@ Matriz::Matriz()
     this->matriz_ptr = new int[25];
 
     // Inicializa la matriz con ceros.
-    for( int indiceFila = 0; indiceFila < 5; ++indiceFila )
+    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
     {
-        for( int indiceColumna = 0; indiceColumna < 5; ++indiceColumna )
+        for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            ( this->matriz_ptr + indiceFila * 5 )[indiceColumna] = 0;
+            ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
         }
     }
 
@@ -27,7 +27,7 @@ Matriz::Matriz()
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << ( this->matriz_ptr + indiceFila * 5 )[indiceColumna] << std::endl;
+            std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << ( this->matriz_ptr + indiceFila *  this->cntColumnas )[indiceColumna] << std::endl;
         }
         std::cout << std::endl << std::endl;
     }*/
@@ -44,7 +44,7 @@ Matriz::Matriz(int cf, int cc)
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            ( this->matriz_ptr + indiceFila * cc )[indiceColumna] = 0;
+            ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] = 0;
         }
     }
 
