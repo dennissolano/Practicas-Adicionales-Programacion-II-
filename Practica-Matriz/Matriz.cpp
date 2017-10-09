@@ -5,6 +5,8 @@
 
 #include <stddef.h>
 #include <iostream>
+#include <memory>
+#include <iomanip>
 
 #include "Matriz.h"
 
@@ -142,6 +144,17 @@ Matriz& Matriz::operator*(const Matriz& x ) const
 
 Matriz& Matriz::operator+(const Matriz& x ) const
 {
+    Matriz* matrizSuma = new Matriz( this->cntFilas, this->cntColumnas );
+
+    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
+    {
+        for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
+        {
+            *( ( matrizSuma->matriz_ptr + indiceFila * matrizSuma->cntColumnas ) + indiceColumna ) = *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) + *( ( x.matriz_ptr + indiceFila * x.cntColumnas ) + indiceColumna );
+        }
+    }
+
+    return *matrizSuma;
 }
 
 Matriz& Matriz::operator-(const Matriz& x ) const
@@ -152,10 +165,12 @@ void Matriz::imprimir() const
 {
     for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
     {
+        std::cout << std::setw( 4 );
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            std::cout << this->matriz_ptr[indiceFila * this->cntColumnas + indiceColumna] << "  ";
+            std::cout << this->matriz_ptr[indiceFila * this->cntColumnas + indiceColumna] << std::setw( 4 );
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
