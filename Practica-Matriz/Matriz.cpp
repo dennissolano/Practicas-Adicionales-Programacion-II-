@@ -24,14 +24,14 @@ Matriz::Matriz()
         }
     }
 
-    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
+    /*for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
             std::cout << "Fila: " << indiceFila << "  Columna: " << indiceColumna << "  Valor: " << ( this->matriz_ptr + indiceFila * this->cntColumnas )[indiceColumna] << std::endl;
         }
         std::cout << std::endl << std::endl;
-    }
+    }*/
 }
 
 Matriz::Matriz(int cf, int cc)
@@ -146,4 +146,16 @@ Matriz& Matriz::operator+(const Matriz& x ) const
 
 Matriz& Matriz::operator-(const Matriz& x ) const
 {
+}
+
+void Matriz::imprimir() const
+{
+    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
+    {
+        for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
+        {
+            std::cout << this->matriz_ptr[indiceFila * this->cntColumnas + indiceColumna] << "  ";
+        }
+        std::cout << std::endl;
+    }
 }
