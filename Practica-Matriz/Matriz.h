@@ -38,15 +38,15 @@ public:
 
     /* OPERADORES */
 
-    // REQ: this->obtCntFilas() == x.obtCntColumnas && this->obtCntColumnas() == x.obtCntColumnas
+    // REQ: this->obtCntFilas() == x.obtCntFilas && this->obtCntColumnas() == x.obtCntColumnas
     // EFE: retorna una nueva matriz que representa la suma de *this y x.
     Matriz& operator+(const Matriz& x) const;
 
-    // REQ: this->obtCntFilas() == x.obtCntColumnas && this->obtCntColumnas() == x.obtCntColumnas
+    // REQ: this->obtCntFilas() == x.obtCntFilas && this->obtCntColumnas() == x.obtCntColumnas
     // EFE: retorna una nueva matriz que representa la resta de *this y x.
     Matriz& operator-(const Matriz& x) const;
 
-    // REQ: this->obtCntFilas() == x.obtCntColumnas && this->obtCntColumnas() == x.obtCntColumnas
+    // REQ: this->obtCntColumnas() == x.obtCntFilas.
     // EFE: retorna una nueva matriz que representa el producto matricial de *this y x.
     Matriz& operator*(const Matriz& x) const;
 
