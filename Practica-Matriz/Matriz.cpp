@@ -153,12 +153,23 @@ Matriz& Matriz::operator+(const Matriz& x ) const
             *( ( matrizSuma->matriz_ptr + indiceFila * matrizSuma->cntColumnas ) + indiceColumna ) = *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) + *( ( x.matriz_ptr + indiceFila * x.cntColumnas ) + indiceColumna );
         }
     }
-
     return *matrizSuma;
 }
 
 Matriz& Matriz::operator-(const Matriz& x ) const
 {
+
+    Matriz* matrizResta = new Matriz( this->cntFilas, this->cntColumnas );
+
+    for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
+    {
+        for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
+        {
+            *( ( matrizResta->matriz_ptr + indiceFila * matrizResta->cntColumnas ) + indiceColumna ) = *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) - *( ( x.matriz_ptr + indiceFila * x.cntColumnas ) + indiceColumna );
+        }
+    }
+
+    return *matrizResta;
 }
 
 void Matriz::imprimir() const
