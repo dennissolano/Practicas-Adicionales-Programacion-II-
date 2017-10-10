@@ -31,7 +31,7 @@ Matriz::Matriz(int cf, int cc)
 {
     this->cntFilas = cf;
     this->cntColumnas = cc;
-    this->matriz_ptr = new int[cntFilas * cntColumnas];
+    this->matriz_ptr = new int[this->cntFilas * this->cntColumnas];
 
     // Inicializa la matriz con ceros.
     for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
@@ -118,7 +118,7 @@ Matriz& Matriz::operator+(const Matriz& x ) const
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            *( ( matrizSuma->matriz_ptr + indiceFila * matrizSuma->cntColumnas ) + indiceColumna ) = *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) + *( ( x.matriz_ptr + indiceFila * x.cntColumnas ) + indiceColumna );
+            matrizSuma->asgValor( indiceFila, indiceColumna, this->obtValor( indiceFila, indiceColumna ) + x.obtValor( indiceFila, indiceColumna ) );
         }
     }
     return *matrizSuma;
@@ -133,7 +133,7 @@ Matriz& Matriz::operator-(const Matriz& x ) const
     {
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            *( ( matrizResta->matriz_ptr + indiceFila * matrizResta->cntColumnas ) + indiceColumna ) = *( ( this->matriz_ptr + indiceFila * this->cntColumnas ) + indiceColumna ) - *( ( x.matriz_ptr + indiceFila * x.cntColumnas ) + indiceColumna );
+            matrizResta->asgValor( indiceFila, indiceColumna, this->obtValor( indiceFila, indiceColumna ) - x.obtValor( indiceFila, indiceColumna ) );
         }
     }
     return *matrizResta;
@@ -146,7 +146,7 @@ void Matriz::imprimir() const
         std::cout << std::setw( 4 );
         for( int indiceColumna = 0; indiceColumna < this->cntColumnas; ++indiceColumna )
         {
-            std::cout << this->matriz_ptr[indiceFila * this->cntColumnas + indiceColumna] << std::setw( 4 );
+            std::cout << this->obtValor( indiceFila, indiceColumna ) << std::setw( 4 );
         }
         std::cout << std::endl;
     }
