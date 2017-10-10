@@ -141,24 +141,18 @@ void Matriz::asgValor(int f, int c, int v)
 Matriz& Matriz::operator*(const Matriz& x ) const
 {
     Matriz* matrizProducto = new Matriz( this->cntFilas, x.cntColumnas );
-    int columnaVariable = 0; // Columna que varía en *this mientras que la fila es constante.
-    int filaVariable = 0; // Fila que varía en x, mientras que la columna es constante.
     int sumatoriaEntradas = 0;
 
     for( int indiceFila = 0; indiceFila < this->cntFilas; ++indiceFila )
     {
         for( int indiceColumna = 0; indiceColumna < x.cntColumnas; ++indiceColumna )
         {
-            for( int iteraciones = 0; iteraciones < x.cntColumnas; ++iteraciones )
-            {
-                sumatoriaEntradas += this->obtValor( indiceFila, columnaVariable ) * x.obtValor( filaVariable, indiceColumna );
-                ++columnaVariable;
-                ++filaVariable;
+            for( int indiceVariable = 0; indiceVariable < x.cntColumnas; ++indiceVariable )
+            { // Entrada en *this: fila = constante, columna variable. Entrada en x: fila = variable, columna = constante.
+                sumatoriaEntradas += this->obtValor( indiceFila, indiceVariable ) * x.obtValor( indiceVariable, indiceColumna );
+
             }
             matrizProducto->asgValor( indiceFila, indiceColumna, sumatoriaEntradas );
-
-            columnaVariable = 0;
-            filaVariable = 0;
             sumatoriaEntradas = 0;
         }
     }
