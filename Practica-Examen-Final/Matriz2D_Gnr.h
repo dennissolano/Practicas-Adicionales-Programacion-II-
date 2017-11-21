@@ -1,8 +1,11 @@
 #ifndef MATRIZ2D_GNR_H
 #define MATRIZ2D_GNR_H
 
+#include <iostream>
+#include <iomanip>
 #include <memory>
 #include <vector>
+
 using namespace std;
 
 template< typename V > // V: tipod de dato.
@@ -12,7 +15,7 @@ private:
 
     int cantidadFilas;
     int cantidadColumnas;
-    shared_ptr< vector< V > > matrizPtr;
+    vector< V > matriz;
 
 public:
 
@@ -61,21 +64,32 @@ public:
     Matriz2D_Gnr< V >& operator+( const Matriz2D_Gnr< V >& origen ) const;
     Matriz2D_Gnr< V >& operator*( const Matriz2D_Gnr< V >& origen ) const;
     Matriz2D_Gnr< V >& operator%( int escalar ) const;
+
+    /* Otros */
+
+    // REQ: *this haya sido correctamente inicializada.
+    // EFE: imprime el contenido de *this.
+    void imprimirMatriz( )const;
 };
 
 template< typename V >
 Matriz2D_Gnr< V >::Matriz2D_Gnr( int m, int n )
 : cantidadFilas( m )
 , cantidadColumnas( n )
-, matrizPtr( shared_ptr< vector< V > >( new vector< V >( m*n, 0 ) ) )
 {
+    matriz.resize( m*n, V( ) );
 }
 
 template< typename V >
 Matriz2D_Gnr< V >::Matriz2D_Gnr( const Matriz2D_Gnr<V>& origen )
 : cantidadFilas( origen.cantidadFilas )
 , cantidadColumnas( origen.cantidadColumnas )
-, matrizPtr( origen.matrizPtr )
+, matriz( origen.matriz )
+{
+}
+
+template< typename V >
+Matriz2D_Gnr< V >::~Matriz2D_Gnr( )
 {
 }
 
@@ -94,7 +108,7 @@ int Matriz2D_Gnr< V >::obtCantidadColumnas( ) const
 template< typename V >
 V Matriz2D_Gnr< V >::obtValor( int fila, int columna ) const
 {
-    return matrizPtr[fila * cantidadColumnas + columna];
+    matriz[fila * cantidadColumnas + columna ];
 }
 
 template< typename V >
@@ -105,7 +119,7 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::transpuesta( ) const
 template< typename V >
 void Matriz2D_Gnr< V >::asgValor( int fila, int columna, V valor )
 {
-    matrizPtr[fila * cantidadColumnas + columna] = valor;
+    matriz[fila * cantidadColumnas + columna ] = valor;
 }
 
 template< typename V >
@@ -117,7 +131,7 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator=( const Matriz2D_Gnr<V>& origen )
 
         cantidadFilas = origen.cantidadFilas;
         cantidadColumnas = origen.cantidadColumnas;
-        matrizPtr = origen.matrizPtr;
+        matriz = origen.matriz;
     }
     return *this;
 }
@@ -125,6 +139,19 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator=( const Matriz2D_Gnr<V>& origen )
 template< typename V >
 Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator+( const Matriz2D_Gnr< V >& origen ) const
 {
+    Matriz2D_Gnr< V >* matrizSuma = new Matriz2D_Gnr( cantidadFilas, cantidadColumnas );
+
+    for ( int fila = 0; fila < cantidadFilas; ++fila )
+    {
+        for ( int columna = 0; columna < cantidadColumnas; ++columna )
+        {
+
+            V valor = this->obtValor( fila, columna ) + origen.obtValor( fila, columna );
+            matrizSuma->asgValor( fila, columna, valor );
+        }
+    }
+
+    return *matrizSuma;
 }
 
 template< typename V >
@@ -135,6 +162,19 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator*( const Matriz2D_Gnr< V >& origen
 template< typename V >
 Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator%( int escalar ) const
 {
+}
+
+template< typename V >
+void Matriz2D_Gnr< V >::imprimirMatriz( ) const
+{
+    for ( int i = 0; i < cantidadFilas; ++i )
+    {
+        for ( int j = 0; j < cantidadColumnas; ++j )
+        {
+            cout << setw( 10 ) << left << obtValor( i, j );
+        }
+        cout << endl;
+    }
 }
 
 #endif /* MATRIZ2D_GNR_H */
