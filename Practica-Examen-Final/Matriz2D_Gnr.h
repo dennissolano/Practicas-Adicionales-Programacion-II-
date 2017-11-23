@@ -69,7 +69,7 @@ public:
     Matriz2D_Gnr<V>& operator=(const Matriz2D_Gnr< V >& origen);
     Matriz2D_Gnr< V >& operator+(const Matriz2D_Gnr< V >& origen) const;
     Matriz2D_Gnr< V >& operator*(const Matriz2D_Gnr< V >& origen) const;
-    Matriz2D_Gnr< V >& operator%(int escalar) const;
+    Matriz2D_Gnr< V >& operator%(V escalar) const; // El escalar es del mismo tipo que los elementos de la matriz.
 
     /* Otros */
 
@@ -163,22 +163,42 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator+(const Matriz2D_Gnr< V >& origen)
 template< typename V >
 Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator*(const Matriz2D_Gnr< V >& origen) const
 {
+    Matriz2D_Gnr< V >* matrizProducto = new Matriz2D_Gnr< V >(cantidadFilas, origen.cantidadColumnas);
+
+    if (cantidadColumnas == origen.cantidadFilas)
+    {
+        for (int i = 0; i < cantidadFilas; ++i)
+        {
+            V sumatoriaEntradas = V();
+
+            for (int j = 0; j < origen.cantidadColumnas; ++j)
+            {
+                for (int indiceVariable = 0; indiceVariable < cantidadFilas; ++indiceVariable)
+                {
+                    sumatoriaEntradas += obtValor(i, indiceVariable) + origen.obtValor(indiceVariable, j);
+                }
+                matrizProducto->asgValor(i, j, sumatoriaEntradas);
+            }
+        }
+    }
+
+    return *matrizProducto;
 }
 
 template< typename V >
-Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator%(int escalar) const
+Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator%(V escalar) const
 {
-    Matriz2D_Gnr< V >* matrizProductoEscalar = new Matriz2D_Gnr< V >(cantidadFilas, cantidadColumnas);
-    *matrizProductoEscalar = *this; // Operador de asignacion sobrecargado.
+    Matriz2D_Gnr< V >* matrizEscalar = new Matriz2D_Gnr< V >(cantidadFilas, cantidadColumnas);
+    *matrizEscalar = *this; // Operador de asignacion sobrecargado.
 
     for (int fila = 0; fila < cantidadFilas; ++fila)
     {
         for (int columna = 0; columna < cantidadColumnas; ++columna)
-            matrizProductoEscalar->asgValor(fila, columna, matrizProductoEscalar->obtValor(fila, columna) * escalar);
+            matrizEscalar->asgValor(fila, columna, matrizEscalar->obtValor(fila, columna) * escalar);
         //matrizProductoEscalar->matriz[fila * cantidadColumnas + columna] *= escalar;
     }
 
-    return *matrizProductoEscalar;
+    return *matrizEscalar;
 }
 
 template< typename V >
