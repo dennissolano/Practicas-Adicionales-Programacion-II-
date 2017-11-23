@@ -21,13 +21,12 @@ int main()
 
     m_int_suma = m_int_suma % 7;
 
-    m_int_multi = m_int1 * m_int3; // OJO: sólo se permite multiplicar si son "compatibles".
-
     m_int1.imprimirMatriz( );
     cout << endl;
 
     m_int3.imprimirMatriz( );
     cout << endl;
+    m_int_multi = m_int1 * m_int3; // OJO: sólo se permite multiplicar si son "compatibles".
 
     std::cout << "Matriz Producto \n\n";
     m_int_multi.imprimirMatriz( );
