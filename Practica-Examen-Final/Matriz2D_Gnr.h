@@ -117,8 +117,7 @@ int Matriz2D_Gnr< V >::obtCantidadColumnas() const
 template< typename V >
 V Matriz2D_Gnr< V >::obtValor(int fila, int columna) const
 {
-    V valor = matriz[fila * cantidadColumnas + columna ];
-    return valor;
+    return matriz[fila * cantidadColumnas + columna ];
 }
 
 template< typename V >
