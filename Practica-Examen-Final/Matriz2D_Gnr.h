@@ -168,6 +168,17 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator*(const Matriz2D_Gnr< V >& origen)
 template< typename V >
 Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator%(int escalar) const
 {
+    Matriz2D_Gnr< V >* matrizProductoEscalar = new Matriz2D_Gnr< V >(cantidadFilas, cantidadColumnas);
+    *matrizProductoEscalar = *this; // Operador de asignacion sobrecargado.
+
+    for (int fila = 0; fila < cantidadFilas; ++fila)
+    {
+        for (int columna = 0; columna < cantidadColumnas; ++columna)
+            matrizProductoEscalar->asgValor(fila, columna, matrizProductoEscalar->obtValor(fila, columna) * escalar);
+        //matrizProductoEscalar->matriz[fila * cantidadColumnas + columna] *= escalar;
+    }
+
+    return *matrizProductoEscalar;
 }
 
 template< typename V >
