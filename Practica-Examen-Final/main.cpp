@@ -8,13 +8,30 @@ int main()
 {
     // Matrices de int:
     Matriz2D_Gnr< int > m_int1( 3, 4 ), m_int2( 3, 4 ), m_int_suma( 3, 4 ); // Suponemos que quedan inicializadas.
+    m_int1.llenarMatriz( );
+    m_int2.llenarMatriz( );
+
     Matriz2D_Gnr< int > m_int3( 4, 3 );
+    m_int3.llenarMatriz( );
+
     Matriz2D_Gnr< int > m_int_multi( 3, 3 ); // para multiplicar una de 3x4 con otra de 4x3 o dos de 3x3.
     Matriz2D_Gnr< int > m_int_trns( 3, 4 );
 
     m_int_suma = m_int1 + m_int2;
+
     m_int_suma = m_int_suma % 7;
+
     m_int_multi = m_int1 * m_int3; // OJO: sólo se permite multiplicar si son "compatibles".
+
+    m_int1.imprimirMatriz( );
+    cout << endl;
+
+    m_int3.imprimirMatriz( );
+    cout << endl;
+
+    std::cout << "Matriz Producto \n\n";
+    m_int_multi.imprimirMatriz( );
+
     m_int_trns = m_int3.transpuesta( );
 
     // Matrices de double:
