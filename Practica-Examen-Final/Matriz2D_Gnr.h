@@ -59,6 +59,11 @@ public:
     // MOD: el valor del elemento contenido en la posición (fila, columna) de *this.
     void asgValor(int fila, int columna, V valor);
 
+    // REQ:
+    // EFE:
+    // MOD:
+    void llenarMatriz();
+
     /* Operadores */
 
     Matriz2D_Gnr<V>& operator=(const Matriz2D_Gnr< V >& origen);
@@ -78,15 +83,8 @@ Matriz2D_Gnr< V >::Matriz2D_Gnr(int m, int n)
 : cantidadFilas(m)
 , cantidadColumnas(n)
 {
-    matriz.resize(m*n, V());
-
-    // Inicializar la matriz con numeros aleatorios entre 0 - 10
     srand(time(NULL));
-    for (int i = 0; i < cantidadFilas; ++i)
-    {
-        for (int j = 0; j < cantidadColumnas; ++j)
-            asgValor(i, j, rand() % 11);
-    }
+    matriz.resize(m*n, V());
 }
 
 template< typename V >
@@ -137,7 +135,6 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator=(const Matriz2D_Gnr<V>& origen)
     // Evita que *this se copie a sí mismo.
     if (this != &origen)
     {
-
         cantidadFilas = origen.cantidadFilas;
         cantidadColumnas = origen.cantidadColumnas;
         matriz = origen.matriz;
@@ -183,6 +180,16 @@ void Matriz2D_Gnr< V >::imprimirMatriz() const
             cout << setw(10) << left << obtValor(i, j);
         }
         cout << endl;
+    }
+}
+
+template< typename V >
+void Matriz2D_Gnr< V >::llenarMatriz()
+{
+    for (int i = 0; i < cantidadFilas; ++i)
+    {
+        for (int j = 0; j < cantidadColumnas; ++j)
+            asgValor(i, j, (rand() % 11));
     }
 }
 
