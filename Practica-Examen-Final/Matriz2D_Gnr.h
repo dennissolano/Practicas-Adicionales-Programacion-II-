@@ -121,6 +121,17 @@ V Matriz2D_Gnr< V >::obtValor(int fila, int columna) const
 template< typename V >
 Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::transpuesta() const
 {
+    Matriz2D_Gnr< V >* transpuesta = new Matriz2D_Gnr< V >(cantidadColumnas, cantidadFilas);
+
+    for (int i = 0; i < cantidadFilas; ++i)
+    {
+        for (int j = 0; j < cantidadColumnas; ++j)
+        {
+            transpuesta->asgValor(j, i, obtValor(i, j));
+        }
+    }
+
+    return *transpuesta;
 }
 
 template< typename V >
