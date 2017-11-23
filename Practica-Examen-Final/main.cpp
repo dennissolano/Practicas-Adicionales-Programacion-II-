@@ -18,20 +18,16 @@ int main()
     Matriz2D_Gnr< int > m_int_trns( 3, 4 );
 
     m_int_suma = m_int1 + m_int2;
-
     m_int_suma = m_int_suma % 7;
-
-    m_int1.imprimirMatriz( );
-    cout << endl;
+    m_int_multi = m_int1 * m_int3; // OJO: sólo se permite multiplicar si son "compatible
 
     m_int3.imprimirMatriz( );
     cout << endl;
-    m_int_multi = m_int1 * m_int3; // OJO: sólo se permite multiplicar si son "compatibles".
-
-    std::cout << "Matriz Producto \n\n";
-    m_int_multi.imprimirMatriz( );
 
     m_int_trns = m_int3.transpuesta( );
+
+    std::cout << "Matriz Transpuesta  de m_int3 \n\n";
+    m_int_trns.imprimirMatriz( );
 
     // Matrices de double:
     Matriz2D_Gnr< int > m_double( 3, 4 ), m_double1( 3, 4 ), m_double2( 3, 4 ), m_double_suma( 3, 4 ); // Suponemos que quedan inicializadas.
