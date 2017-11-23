@@ -169,13 +169,13 @@ Matriz2D_Gnr< V >& Matriz2D_Gnr< V >::operator*(const Matriz2D_Gnr< V >& origen)
     {
         for (int i = 0; i < cantidadFilas; ++i)
         {
-            V sumatoriaEntradas = V();
-
             for (int j = 0; j < origen.cantidadColumnas; ++j)
             {
-                for (int indiceVariable = 0; indiceVariable < cantidadFilas; ++indiceVariable)
+                V sumatoriaEntradas = V();
+
+                for (int indiceVariable = 0; indiceVariable < cantidadColumnas; ++indiceVariable)
                 {
-                    sumatoriaEntradas += obtValor(i, indiceVariable) + origen.obtValor(indiceVariable, j);
+                    sumatoriaEntradas += obtValor(i, indiceVariable) * origen.obtValor(indiceVariable, j);
                 }
                 matrizProducto->asgValor(i, j, sumatoriaEntradas);
             }
